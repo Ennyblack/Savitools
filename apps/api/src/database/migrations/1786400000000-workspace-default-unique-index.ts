@@ -1,5 +1,6 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
+
 /**
  * Enforces "at most one default (unnamed) workspace per user per tool".
  *
