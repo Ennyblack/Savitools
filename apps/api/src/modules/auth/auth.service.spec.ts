@@ -227,8 +227,8 @@ describe('AuthService', () => {
           id: 'cred-id-1',
           rawId: 'cred-id-1',
           type: 'public-key',
-          response: { challenge: 'x' } as any,
-        } as any),
+          response: { challenge: 'x' } as Record<string, unknown>,
+        } as unknown as Parameters<typeof service.verifyPasskeyLogin>[0]),
       ).rejects.toThrow(/PASSKEY_REVOKED/);
     });
 
