@@ -144,14 +144,14 @@ describe('AuthService', () => {
     config = mockConfig();
 
     service = new AuthService(
-      usersRepo as any,
-      refreshTokensRepo as any,
-      connectedAccountsRepo as any,
-      vaultKeysRepo as any,
-      passkeysRepo as any,
-      jwt as any,
-      config as any,
-      new EncryptionService(config as any),
+      usersRepo as unknown as Parameters<typeof AuthService>[0],
+      refreshTokensRepo as unknown as Parameters<typeof AuthService>[1],
+      connectedAccountsRepo as unknown as Parameters<typeof AuthService>[2],
+      vaultKeysRepo as unknown as Parameters<typeof AuthService>[3],
+      passkeysRepo as unknown as Parameters<typeof AuthService>[4],
+      jwt as unknown as Parameters<typeof AuthService>[5],
+      config as unknown as Parameters<typeof AuthService>[6],
+      new EncryptionService(config as unknown as Parameters<typeof EncryptionService>[0]),
     );
   });
 
@@ -227,8 +227,8 @@ describe('AuthService', () => {
           id: 'cred-id-1',
           rawId: 'cred-id-1',
           type: 'public-key',
-          response: { challenge: 'x' } as any,
-        } as any),
+          response: { challenge: 'x' } as Record<string, unknown>,
+        } as unknown as Parameters<typeof service.verifyPasskeyLogin>[0]),
       ).rejects.toThrow(/PASSKEY_REVOKED/);
     });
 
