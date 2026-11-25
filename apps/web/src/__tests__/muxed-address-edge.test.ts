@@ -1,5 +1,5 @@
 import { describe, it, expect } from '@jest/globals';
-import { StrKey } from '@stellar/stellar-sdk';
+// removed unused import
 import { previewDestination } from '@/lib/muxed-address';
 
 describe('muxed-address edge cases', () => {
