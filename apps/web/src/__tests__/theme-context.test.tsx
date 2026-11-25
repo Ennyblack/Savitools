@@ -7,9 +7,15 @@ function ThemeProbe() {
   return (
     <div>
       <div data-testid="theme">{theme}</div>
-      <button type="button" onClick={() => setTheme('dark')}>Set Dark</button>
-      <button type="button" onClick={() => setTheme('light')}>Set Light</button>
-      <button type="button" onClick={toggleTheme}>Toggle</button>
+      <button type="button" onClick={() => setTheme('dark')}>
+        Set Dark
+      </button>
+      <button type="button" onClick={() => setTheme('light')}>
+        Set Light
+      </button>
+      <button type="button" onClick={toggleTheme}>
+        Toggle
+      </button>
     </div>
   );
 }

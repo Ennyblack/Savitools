@@ -12,7 +12,9 @@ import { MigrationInterface, QueryRunner } from 'typeorm';
  * their (user_id, tool) group before the index is created, otherwise the index
  * creation itself would fail on a database that already has duplicates.
  */
-export class WorkspaceDefaultUniqueIndex1786400000001 implements MigrationInterface {
+export class WorkspaceDefaultUniqueIndex1786400000001
+  implements MigrationInterface
+{
   name = 'WorkspaceDefaultUniqueIndex1786400000001';
 
   async up(queryRunner: QueryRunner): Promise<void> {

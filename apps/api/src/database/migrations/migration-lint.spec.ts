@@ -1,5 +1,5 @@
-import { readdirSync } from 'fs';
-import { join } from 'path';
+import { readdirSync } from 'node:fs';
+import { join } from 'node:path';
 
 describe('migration filename lint', () => {
   it('has strictly increasing and unique numeric timestamp prefixes', () => {
@@ -16,11 +16,9 @@ describe('migration filename lint', () => {
       timestamps.push(ts);
     }
 
-    // Check uniqueness
     const uniqueTimestamps = new Set(timestamps);
     expect(uniqueTimestamps.size).toBe(timestamps.length);
 
-    // Check strictly increasing order
     for (let i = 1; i < timestamps.length; i++) {
       expect(timestamps[i]).toBeGreaterThan(timestamps[i - 1]);
     }

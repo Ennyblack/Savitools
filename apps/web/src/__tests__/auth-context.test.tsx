@@ -21,9 +21,18 @@ function AuthProbe() {
     <div>
       <div data-testid="loading">{String(loading)}</div>
       <div data-testid="user">{user ? user.email : 'guest'}</div>
-      <button type="button" onClick={() => void login('test@example.com', 'password')}>Login</button>
-      <button type="button" onClick={() => void logout()}>Logout</button>
-      <button type="button" onClick={() => void refreshUser()}>Refresh</button>
+      <button
+        type="button"
+        onClick={() => void login('test@example.com', 'password')}
+      >
+        Login
+      </button>
+      <button type="button" onClick={() => void logout()}>
+        Logout
+      </button>
+      <button type="button" onClick={() => void refreshUser()}>
+        Refresh
+      </button>
     </div>
   );
 }
@@ -35,7 +44,12 @@ describe('AuthProvider & useAuth', () => {
 
   it('handles successful session refresh on mount', async () => {
     (api.refreshSession as jest.Mock).mockResolvedValue({
-      user: { id: '1', email: 'refreshed@example.com', emailVerified: true, fluxaTenantId: null },
+      user: {
+        id: '1',
+        email: 'refreshed@example.com',
+        emailVerified: true,
+        fluxaTenantId: null,
+      },
     });
 
     render(
@@ -48,14 +62,23 @@ describe('AuthProvider & useAuth', () => {
 
     await waitFor(() => {
       expect(screen.getByTestId('loading').textContent).toBe('false');
-      expect(screen.getByTestId('user').textContent).toBe('refreshed@example.com');
+      expect(screen.getByTestId('user').textContent).toBe(
+        'refreshed@example.com',
+      );
     });
   });
 
   it('falls back to getCurrentUser and handles token refresh failure gracefully', async () => {
-    (api.refreshSession as jest.Mock).mockRejectedValue(new Error('no session'));
+    (api.refreshSession as jest.Mock).mockRejectedValue(
+      new Error('no session'),
+    );
     (api.getCurrentUser as jest.Mock).mockResolvedValue({
-      user: { id: '2', email: 'current@example.com', emailVerified: true, fluxaTenantId: null },
+      user: {
+        id: '2',
+        email: 'current@example.com',
+        emailVerified: true,
+        fluxaTenantId: null,
+      },
     });
 
     render(
@@ -71,8 +94,12 @@ describe('AuthProvider & useAuth', () => {
   });
 
   it('handles complete authentication failure on mount resulting in guest user', async () => {
-    (api.refreshSession as jest.Mock).mockRejectedValue(new Error('no session'));
-    (api.getCurrentUser as jest.Mock).mockRejectedValue(new Error('unauthorized'));
+    (api.refreshSession as jest.Mock).mockRejectedValue(
+      new Error('no session'),
+    );
+    (api.getCurrentUser as jest.Mock).mockRejectedValue(
+      new Error('unauthorized'),
+    );
 
     render(
       <AuthProvider>
@@ -87,10 +114,19 @@ describe('AuthProvider & useAuth', () => {
   });
 
   it('handles login and logout state transitions correctly', async () => {
-    (api.refreshSession as jest.Mock).mockRejectedValue(new Error('no session'));
-    (api.getCurrentUser as jest.Mock).mockRejectedValue(new Error('unauthorized'));
+    (api.refreshSession as jest.Mock).mockRejectedValue(
+      new Error('no session'),
+    );
+    (api.getCurrentUser as jest.Mock).mockRejectedValue(
+      new Error('unauthorized'),
+    );
     (api.login as jest.Mock).mockResolvedValue({
-      user: { id: '3', email: 'login@example.com', emailVerified: true, fluxaTenantId: null },
+      user: {
+        id: '3',
+        email: 'login@example.com',
+        emailVerified: true,
+        fluxaTenantId: null,
+      },
     });
     (api.logout as jest.Mock).mockResolvedValue(undefined);
 
@@ -123,7 +159,9 @@ describe('AuthProvider & useAuth', () => {
     const ConsoleError = console.error;
     console.error = jest.fn();
 
-    expect(() => render(<AuthProbe />)).toThrow('useAuth must be used within AuthProvider');
+    expect(() => render(<AuthProbe />)).toThrow(
+      'useAuth must be used within AuthProvider',
+    );
 
     console.error = ConsoleError;
   });
