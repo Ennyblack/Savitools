@@ -150,7 +150,7 @@ describe('redactValue', () => {
       user: 'alice',
       auth: { authorization: 'Bearer tok', userId: 'u1' },
     };
-    const result = redactValue(input) as any;
+    const result = redactValue(input) as Record<string, unknown>;
     expect(result.user).toBe('alice');
     expect(result.auth.authorization).toBe(REDACTED);
     expect(result.auth.userId).toBe('u1');
