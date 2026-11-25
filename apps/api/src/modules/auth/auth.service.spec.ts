@@ -77,7 +77,7 @@ function fakeRefreshTokenTable(seed: Array<Record<string, unknown>>) {
         }
         return { affected };
       },
-    ),
+    ) as unknown,
     delete: jest.fn(async () => ({ affected: 1 })),
     find: jest.fn(async () => Array.from(rows.values())),
   };
@@ -128,7 +128,7 @@ describe('AuthService', () => {
   beforeAll(async () => {
     passwordHash = await argon2.hash('password123', {
       type: argon2.argon2id,
-      memoryCost: 1024, // low cost for tests
+      memoryCost: 1024,
       timeCost: 1,
       parallelism: 1,
     });
