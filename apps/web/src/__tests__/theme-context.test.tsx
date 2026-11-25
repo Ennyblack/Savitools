@@ -57,6 +57,25 @@ describe('ThemeProvider & useTheme', () => {
     expect(screen.getByTestId('theme').textContent).toBe('light');
   });
 
+  it('loads theme from localStorage if present', () => {
+    localStorage.setItem('theme', 'dark');
+    render(
+      <ThemeProvider>
+        <ThemeProbe />
+      </ThemeProvider>,
+    );
+    expect(screen.getByTestId('theme').textContent).toBe('dark');
+  });
+
+  it('respects defaultTheme prop', () => {
+    render(
+      <ThemeProvider defaultTheme="dark">
+        <ThemeProbe />
+      </ThemeProvider>,
+    );
+    expect(screen.getByTestId('theme').textContent).toBe('dark');
+  });
+
   it('throws an error when useTheme is used outside of ThemeProvider', () => {
     const ConsoleError = console.error;
     console.error = jest.fn();
